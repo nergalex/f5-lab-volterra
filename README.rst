@@ -50,7 +50,7 @@ Automated use case (workflow)
 2. Clean Volterra GW on an AWS VPC site
 *********************************************
 - Connect to Ansible Tower using Github
-- Launch Template >> ``wf-volterra-clean_vpc_arcadia``
+- Launch Template >> ``wf-volterra-delete_vpc_arcadia``
 
 
 
