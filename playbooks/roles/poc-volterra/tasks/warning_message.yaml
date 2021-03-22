@@ -1,0 +1,7 @@
+- name: Warning message
+  debug:
+    msg: "You chose unlimited duration for this Lab, please launch deletion workflow when you finish"
+
+
+
+

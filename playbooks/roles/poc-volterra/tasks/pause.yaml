@@ -1,0 +1,8 @@
+- name: Wait until automatic deletion
+  pause:
+    minutes: {{ (extra_duration*60*24)|int|abs }}
+  failed_when: extra_duration == 0
+
+
+
+
