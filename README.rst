@@ -32,12 +32,12 @@ Pre-requisites
 #############################################
 1. Manage L3 access to Ansible Tower
 *************************************
-- Connect to Azure Portal
+- Connect to `Azure <https://portal.azure.com>`_
 - Update Network security groups ``nsg-tower`` >> Inbound security rules >> rule ``https``: add your Public IP
 
 2. Manage authorisation to Ansible Tower
 *****************************************
-- Connect to Ansible Tower using Github authentication logo
+- Connect to `Ansible Tower <https://tower-cloudbuilderf5.eastus2.cloudapp.azure.com>`_ using Github authentication logo
 - Contact administrator to add your account into Lab group
 
 Automated use case (workflow)
