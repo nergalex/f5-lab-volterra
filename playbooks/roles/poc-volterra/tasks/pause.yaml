@@ -5,8 +5,8 @@
     username: "{{ extra_notification_user }}"
     password: "{{ extra_notification_password }}"
     to: "{{ extra_notification_to }}"
-    subject: Tower - Volterra lab - unlimited duration
-    body: "User {{ extra_owner_email }} deployed AWS VPC site {{ extra_volterra_site_id }} with unlimited duration"
+    subject: "[Tower Notification] Volterra lab - unlimited deployment duration"
+    body: "User {{ extra_owner_email }} deployed an AWS VPC site, named cloudbuilder-{{ extra_volterra_site_id }}, with no duration limit set"
   delegate_to: localhost
   when: extra_duration == 0
 
