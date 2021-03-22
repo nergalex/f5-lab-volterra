@@ -27,8 +27,8 @@
     status_code: 200
   register: output
   until: "output.json.status.apply_status.apply_state is defined and output.json.status.apply_status.apply_state == 'DESTROYED'"
-  retries: 50
-  delay: 30
+  retries: 20
+  delay: 60
 
 - name: DELETE site configuration
   uri:
