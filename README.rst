@@ -37,19 +37,19 @@ Pre-requisites
 
 2. Manage authorisation to Ansible Tower
 *****************************************
-- Connect to Ansible Tower using Github
+- Connect to Ansible Tower using Github authentication logo
 - Contact administrator to add your account into Lab group
 
 Automated use case (workflow)
 #############################################
 1. Deploy a Volterra GW on an AWS VPC site
 *********************************************
-- Connect to Ansible Tower using Github
+- Connect to `Ansible Tower <https://tower-cloudbuilderf5.eastus2.cloudapp.azure.com>`_ using Github authentication logo
 - Launch Template >> ``wf-volterra-deploy_vpc_arcadia``
 
 2. Clean Volterra GW on an AWS VPC site
 *********************************************
-- Connect to Ansible Tower using Github
+- Connect to `Ansible Tower <https://tower-cloudbuilderf5.eastus2.cloudapp.azure.com>`_ using Github authentication logo
 - Launch Template >> ``wf-volterra-delete_vpc_arcadia``
 
 
