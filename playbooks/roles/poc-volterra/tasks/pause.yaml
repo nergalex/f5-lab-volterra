@@ -1,3 +1,15 @@
+- name: Sending an e-mail using Gmail SMTP servers
+  community.general.mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "{{ extra_notification_user }}"
+    password: "{{ extra_notification_password }}"
+    to: "{{ extra_notification_to }}"
+    subject: Tower - Volterra lab - unlimited duration
+    body: "User {{ extra_owner_email }} deployed AWS VPC site {{ extra_volterra_site_id }} with unlimited duration"
+  delegate_to: localhost
+  when: extra_duration == 0
+
 - name: Wait until automatic deletion
   pause:
     minutes: "{{ (extra_duration*60*24)|int|abs }}"
