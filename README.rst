@@ -17,7 +17,7 @@ Demo
 
 .. raw:: html
 
-    <a href="http://www.youtube.com/watch?v=BMEK_JEi3cc"><img src="http://img.youtube.com/vi/BMEK_JEi3cc/0.jpg" width="600" height="400" title="Create Identity Provider" alt="Create Identity Provider"></a>
+    <a href="http://www.youtube.com/watch?v=vV88-iV9czg"><img src="http://img.youtube.com/vi/vV88-iV9czg/0.jpg" width="600" height="400" title="Deploy a Volterra GW on an AWS VPC site" alt="Deploy a Volterra GW on an AWS VPC site"></a>
 
 User guide
 ==================================================
