@@ -1,0 +1,62 @@
+- name: "CREATE key pair cloudbuilder-{{ extra_volterra_site_id }}-key"
+  amazon.aws.ec2_key:
+    name: "cloudbuilder-{{ extra_volterra_site_id }}-key"
+    key_material: "{{ extra_ssh_key }}"
+    region: "{{ extra_aws_region }}"
+
+- name: GET subnet 'workload'
+  amazon.aws.ec2_vpc_subnet_info:
+    region: "{{ extra_aws_region }}"
+    filters:
+      tag:ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+      tag:ves.io/subnet-type: workload
+  register: var_subnet_workload
+
+- name: "CREATE NIC cloudbuilder-{{ extra_volterra_site_id }}-vm_arcadia-nic0"
+  amazon.aws.ec2_eni:
+    name: "cloudbuilder-{{ extra_volterra_site_id }}-vm_arcadia-nic0"
+    description: VM arcadia - NIC workload
+    region: "{{ extra_aws_region }}"
+    subnet_id: "{{ var_subnet_workload.subnets.0.subnet_id }}"
+    private_ip_address: "10.{{ extra_volterra_site_id }}.2.10"
+    device_index: 0
+    source_dest_check: no
+    tags:
+      project: cloudbuilder
+      ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+  register: var_nic_workload
+
+- name: "CREATE VM cloudbuilder-{{ extra_volterra_site_id }}-arcadia"
+  amazon.aws.ec2:
+    key_name: "cloudbuilder-{{ extra_volterra_site_id }}-key"
+    image: ami-0c239ecd40dcc174c
+    network_interfaces: ["{{ var_nic_workload.interface.id }}"]
+    instance_type: t2.medium
+    region: "{{ extra_aws_region }}"
+    zone: "{{ extra_aws_region_az }}"
+    wait: yes
+    wait_timeout: 600
+    monitoring: no
+    source_dest_check: no
+    user_data: "{{ lookup('template', 'arcadia_1nic_cloudinit.yaml') }}"
+    instance_tags:
+      Name: "cloudbuilder-{{ extra_volterra_site_id }}-arcadia"
+      project: cloudbuilder
+      ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+
+- name: "UPDATE delete_on_termination on NIC {{ var_nic_workload.interface.id }}"
+  amazon.aws.ec2_eni:
+    eni_id: "{{ var_nic_workload.interface.id }}"
+    region: "{{ extra_aws_region }}"
+    delete_on_termination: yes
+
+- name: Useful info
+  debug:
+    msg: "
+    VM Private IP: 10.{{ extra_volterra_site_id }}.2.10
+    Arcadia all_in_one service port: 80
+    Arcadia's mainapp service port:  81
+    Arcadia's app2 service port:     82
+    Arcadia's app3 service port:     83
+    Arcadia's backend service port:  84
+    "

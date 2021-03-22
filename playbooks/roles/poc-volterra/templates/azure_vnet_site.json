@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "description": "string",
+    "labels": {
+      "owner": "tower.f5cloudbuilder.dev",
+      "project": "cloudbuilder"
+    },
+    "name": "cloudbuilder-{{ extra_volterra.namespace }}",
+    "namespace": "{{ extra_volterra.namespace }}"
+  },
+  "spec": {
+    "address": "20 W 34th Street, New York, NY, 10001",
+    "assisted": {},
+    "azure_cred": {
+      "name": "{{ extra_volterra.azure_cred.name }}",
+      "namespace": "system",
+      "tenant": "{{ extra_volterra.tenant }}"
+    },
+    "azure_region": "{{ extra_azure.region }}",
+    "coordinates": {
+      "latitude": 40.748817,
+      "longitude": -73.985428
+    },
+    "ingress_egress_gw": {
+      "az_nodes": [
+        {
+          "azure_az": "1",
+          "inside_subnet": {
+            "subnet": {
+              "subnet_name": "{{ extra_azure.subnet.internal }}",
+              "subnet_resource_grp": "{{ extra_azure.resource_group }}"
+            }
+          },
+          "outside_subnet": {
+            "subnet": {
+              "subnet_name": "{{ extra_azure.subnet.external }}",
+              "subnet_resource_grp": "{{ extra_azure.resource_group }}"
+            }
+          }
+        }
+      ],
+      "azure_certified_hw": "azure-byol-multi-nic-voltmesh",
+      "no_forward_proxy": {},
+      "no_global_network": {},
+      "no_inside_static_routes": {},
+      "no_network_policy": {},
+      "no_outside_static_routes": {}
+    },
+    "logs_streaming_disabled": {},
+    "machine_type": "Standard_D3_v2",
+    "nodes_per_az": 1,
+    "resource_group": "rg-cloudbuilder-{{ extra_volterra.namespace }}",
+    "ssh_key": "extra_ssh_key",
+    "vnet": {
+      "existing_vnet": {
+        "resource_group": "{{ extra_azure.resource_group }}",
+        "vnet_name": "{{ extra_azure.vnet.name }}"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+- name: CREATE site configuration
+  uri:
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/aws_vpc_sites"
+    method: POST
+    headers:
+      "Content-Type": "application/json"
+      "Authorization": "APIToken {{ extra_volterra.token }}"
+    body: "{{ lookup('template','aws_vpc_site.json') }}"
+    body_format: json
+    status_code: 200
+
+- name: set var_terraform
+  set_fact:
+    var_terraform:
+      action: APPLY
+      namespace: system
+      view_kind: aws_vpc_site
+      view_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+
+- name: DEPLOY site
+  uri:
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/terraform/namespaces/system/terraform/{{ var_terraform.view_kind }}/{{ var_terraform.view_name }}/run"
+    method: POST
+    headers:
+      "Content-Type": "application/json"
+      "Authorization": "APIToken {{ extra_volterra.token }}"
+    body: "{{ lookup('template','terraform_action.json') }}"
+    body_format: json
+    status_code: 200
+  register: output
+
+- name: GET deployment status
+  uri:
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/terraform_parameters/{{ var_terraform.view_kind }}/{{ var_terraform.view_name }}/status"
+    method: GET
+    headers:
+      "Authorization": "APIToken {{ extra_volterra.token }}"
+    status_code: 200
+  register: output
+  until: "output.json.status.apply_status.apply_state is defined and output.json.status.apply_status.apply_state == 'APPLIED'"
+  retries: 20
+  delay: 30
+
+
+
+
+
+
+

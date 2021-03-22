@@ -1,0 +1,19 @@
+#cloud-config
+repo_update: true
+repo_upgrade: all
+packages:
+ - docker
+ - wget
+
+runcmd:
+ - service docker start
+ - docker network create internal
+ - docker run -dit -h mainapp --name=mainapp --net=internal -p 81:80 registry.gitlab.com/arcadia-application/main-app/mainapp:latest
+ - docker run -dit -h backend --name=backend --net=internal -p 84:80  registry.gitlab.com/arcadia-application/back-end/backend:latest
+ - docker run -dit -h app2 --name=app2 --net=internal -p 82:80 registry.gitlab.com/arcadia-application/app2/app2:latest
+ - docker run -dit -h app3 --name=app3 --net=internal -p 83:80 registry.gitlab.com/arcadia-application/app3/app3:latest
+ - [ sh, -c, "mkdir -p /etc/nginx/conf.d/" ]
+ - wget -P /etc/nginx/conf.d/ https://raw.githubusercontent.com/nergalex/PublicCloudBuilder/master/arcadia.conf
+ - docker run -dit -h nginx --name=nginx --net=internal -p 80:80 -v /etc/nginx/conf.d/arcadia.conf:/etc/nginx/conf.d/arcadia.conf registry.gitlab.com/arcadia-application/nginx/nginxoss:latest
+
+

@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "description": "Deployed by Ansible Tower",
+    "labels": {
+      "owner": "tower.f5cloudbuilder.dev",
+      "project": "cloudbuilder"
+    },
+    "name": "cloudbuilder-{{ extra_volterra_site_id }}",
+    "namespace": "system"
+  },
+  "spec": {
+    "address": "",
+    "aws_cred": {
+      "name": "{{ extra_volterra.aws_cred.name }}",
+      "namespace": "system",
+      "tenant": "{{ extra_volterra.tenant }}-bceuutam"
+    },
+    "aws_region": "{{ extra_aws_region }}",
+    "coordinates": {
+      "latitude": 48.00000,
+      "longitude": 2.00000
+    },
+    "ingress_egress_gw": {
+     "aws_certified_hw": "aws-byol-multi-nic-voltmesh",
+      "az_nodes": [
+        {
+          "aws_az_name": "{{ extra_aws_region_az }}",
+          "outside_subnet": {
+            "subnet_param": {
+              "ipv4": "10.{{ extra_volterra_site_id }}.0.0/24",
+              "ipv6": ""
+            }
+          },
+          "inside_subnet": {
+            "subnet_param": {
+              "ipv4": "10.{{ extra_volterra_site_id }}.1.0/24",
+              "ipv6": ""
+            }
+          },
+          "workload_subnet": {
+            "subnet_param": {
+              "ipv4": "10.{{ extra_volterra_site_id }}.2.0/24",
+              "ipv6": ""
+            }
+          }
+        }
+      ],
+      "no_forward_proxy": {},
+      "no_global_network": {},
+      "no_inside_static_routes": {},
+      "no_network_policy": {},
+      "no_outside_static_routes": {}
+    },
+    "logs_streaming_disabled": {},
+    "instance_type": "t3.xlarge",
+    "nodes_per_az": 0,
+    "ssh_key": "{{ extra_ssh_key }}",
+    "vpc": {
+      "new_vpc": {
+        "name_tag": "vpc-cloudbuilder-{{ extra_volterra_site_id }}",
+        "primary_ipv4": "10.{{ extra_volterra_site_id }}.0.0/16",
+        "allocate_ipv6": false
+      }
+    }
+  }
+}

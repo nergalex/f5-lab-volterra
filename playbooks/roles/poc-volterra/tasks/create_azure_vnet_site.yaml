@@ -1,0 +1,17 @@
+- name: CREATE sites
+  uri:
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/{{ extra_volterra.namespace }}/azure_vnet_sites"
+    method: POST
+    headers:
+      "Content-Type": "application/json"
+      "Authorization": "APIToken {{ extra_volterra_token }}"
+    body: "{{ lookup('template','azure_vnet_site.json') }}"
+    body_format: json
+    status_code: 200
+  register: var_azure_vnet_site
+
+- debug:
+    var: var_azure_vnet_site
+
+
+
