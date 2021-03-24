@@ -10,7 +10,7 @@
 
 - name: CREATE Network Policy if does not exist
   uri:
-    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/network_policys"
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/network_policys/cloudbuilder"
     method: DELETE
     headers:
       "Content-Type": "application/json"
