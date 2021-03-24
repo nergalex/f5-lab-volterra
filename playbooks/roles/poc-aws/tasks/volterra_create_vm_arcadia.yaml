@@ -29,7 +29,7 @@
 - name: "CREATE VM cloudbuilder-{{ extra_volterra_site_id }}-arcadia"
   amazon.aws.ec2:
     key_name: "cloudbuilder-{{ extra_volterra_site_id }}-key"
-    image: ami-0c239ecd40dcc174c
+    image: ami-0e8286b71b81c3cc1
     network_interfaces: ["{{ var_nic_workload.interface.id }}"]
     instance_type: t2.medium
     region: "{{ extra_aws_region }}"
