@@ -1,0 +1,58 @@
+{
+  "namespace": "system",
+  "metadata": {
+    "name": "cloudbuilder",
+    "namespace": "system",
+    "labels": {},
+    "annotations": {},
+    "description": "generic cloudbuilder site",
+    "disable": null
+  },
+  "spec": {
+    "endpoint": {
+      "prefix_list": {
+        "prefixes": [
+          "10.0.0.0/8"
+        ]
+      }
+    },
+    "ingress_rules": [
+      {
+        "metadata": {
+          "name": "allow-10-any",
+          "description": "allow 10/8 any protocol",
+          "disable": null
+        },
+        "rule_name": null,
+        "rule_description": null,
+        "action": "ALLOW",
+        "prefix_list": {
+          "prefixes": [
+            "10.0.0.0/8"
+          ]
+        },
+        "all_traffic": {},
+        "keys": null
+      }
+    ],
+    "egress_rules": [
+      {
+        "metadata": {
+          "name": "allow-10-any",
+          "description": "allow 10/8 any protocol",
+          "disable": null
+        },
+        "rule_name": null,
+        "rule_description": null,
+        "action": "ALLOW",
+        "prefix_list": {
+          "prefixes": [
+            "10.0.0.0/8"
+          ]
+        },
+        "all_traffic": {},
+        "keys": null
+      }
+    ]
+  }
+}

@@ -45,10 +45,18 @@
           }
         }
       ],
+      "active_network_policies": {
+        "network_policies": [
+          {
+            "name": "cloudbuilder",
+            "namespace": "system",
+            "tenant": "{{ extra_volterra.tenant }}-bceuutam"
+          }
+        ]
+      },
       "no_forward_proxy": {},
       "no_global_network": {},
       "no_inside_static_routes": {},
-      "no_network_policy": {},
       "no_outside_static_routes": {}
     },
     "logs_streaming_disabled": {},
