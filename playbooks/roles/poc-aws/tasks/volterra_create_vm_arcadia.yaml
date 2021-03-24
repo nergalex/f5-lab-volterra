@@ -10,6 +10,7 @@
     filters:
       tag:ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
       tag:ves.io/subnet-type: workload
+      tag:owner: "{{extra_owner_email}}"
   register: var_subnet_workload
 
 - name: "CREATE NIC cloudbuilder-{{ extra_volterra_site_id }}-vm_arcadia-nic0"
@@ -24,6 +25,7 @@
     tags:
       project: cloudbuilder
       ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+      tag:owner: "{{extra_owner_email}}"
   register: var_nic_workload
 
 - name: "CREATE VM cloudbuilder-{{ extra_volterra_site_id }}-arcadia"
@@ -43,6 +45,7 @@
       Name: "cloudbuilder-{{ extra_volterra_site_id }}-arcadia"
       project: cloudbuilder
       ves.io/site_name: "cloudbuilder-{{ extra_volterra_site_id }}"
+      tag:owner: "{{extra_owner_email}}"
 
 - name: "UPDATE delete_on_termination on NIC {{ var_nic_workload.interface.id }}"
   amazon.aws.ec2_eni:
