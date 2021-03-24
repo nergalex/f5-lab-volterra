@@ -29,6 +29,10 @@
   until: "output.json.status.apply_status.apply_state is defined and output.json.status.apply_status.apply_state == 'DESTROYED'"
   retries: 20
   delay: 60
+  ignore_errors: yes
+
+- debug:
+    var: output
 
 - name: DELETE site configuration
   uri:
