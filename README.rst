@@ -47,6 +47,14 @@ Automated use case (workflow)
 - Connect to `Ansible Tower <https://tower-cloudbuilderf5.eastus2.cloudapp.azure.com>`_ using Github authentication logo
 - Launch Template >> ``wf-volterra-deploy_vpc_arcadia``
 
+Arcadia's VM specifications:
+- 10.{{ extra_volterra_site_id }}.2.10 = VM private IP
+- TCP/80 = all_in_one
+- TCP/81 = mainapp
+- TCP/82 = app2
+- TCP/83 = app3
+- TCP/84 = backend
+
 2. Clean Volterra GW on an AWS VPC site
 *********************************************
 - Connect to `Ansible Tower <https://tower-cloudbuilderf5.eastus2.cloudapp.azure.com>`_ using Github authentication logo
