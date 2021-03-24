@@ -10,15 +10,15 @@
 
 - name: CREATE Network Policy if does not exist
   uri:
-    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/network_policys/cloudbuilder"
-    method: DELETE
+    url: "https://{{ extra_volterra.tenant }}.console.ves.volterra.io/api/config/namespaces/system/network_policy_views"
+    method: POST
     headers:
       "Content-Type": "application/json"
       "Authorization": "APIToken {{ extra_volterra.token }}"
-#    body: "{{ lookup('template','network_policy.json') }}"
-#    body_format: json
+    body: "{{ lookup('template','network_policy.json') }}"
+    body_format: json
     status_code: 200
-#  when: var_network_policy.status == 404
+  when: var_network_policy.status == 404
 
 
 
