@@ -35,7 +35,7 @@
     network_interfaces: ["{{ var_nic_workload.interface.id }}"]
     instance_type: t2.medium
     region: "{{ extra_aws_region }}"
-    zone: "{{ extra_aws_region_az }}"
+    zone: "{{ extra_aws_region }}a"
     wait: yes
     wait_timeout: 600
     monitoring: no
