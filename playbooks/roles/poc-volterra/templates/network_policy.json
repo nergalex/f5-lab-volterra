@@ -1,12 +1,13 @@
 {
-  "namespace": "system",
   "metadata": {
     "name": "cloudbuilder",
     "namespace": "system",
-    "labels": {},
-    "annotations": {},
+    "labels": {
+      "owner": "{{ extra_owner_email }}",
+      "project": "cloudbuilder"
+    },
     "description": "generic cloudbuilder site",
-    "disable": null
+    "disable": false
   },
   "spec": {
     "endpoint": {
